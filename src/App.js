@@ -20,7 +20,6 @@ componentDidMount() {
 
 changeShelf = (book, shelf) => {
   book.shelf = shelf
-  console.log(book)
   let shelfChange = this.state.books.filter((b) => b.id !== book.id)
 
   shelfChange = shelfChange.concat([book])
