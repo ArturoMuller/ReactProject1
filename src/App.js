@@ -12,15 +12,15 @@ class BooksApp extends Component {
 
 componentDidMount() {
     BooksAPI.getAll().then((books) => {
+      console.log(books)
       this.setState({books: books})
-      console.log(this.state.books)
     })
 
   }
 
 changeShelf = (book, shelf) => {
   book.shelf = shelf
-
+  console.log(book)
   let shelfChange = this.state.books.filter((b) => b.id !== book.id)
 
   shelfChange = shelfChange.concat([book])
@@ -44,8 +44,8 @@ changeShelf = (book, shelf) => {
           <ListBooks changeShelf={this.changeShelf} books={this.state.books}/>
         )}/>
 
-        <Route path="/add" render={() => (
-          <AddBook />
+        <Route path="/search" render={() => (
+          <AddBook changeShelf={this.changeShelf} />
         )}/>
 
       </div>
