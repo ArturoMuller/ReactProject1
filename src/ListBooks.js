@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
+import Shelf from './Shelf'
 
 
 
@@ -12,26 +13,7 @@ class ListBooks extends Component {
        changeShelf: PropTypes.func.isRequired
      }
 
-    createBook = (book, changeShelf="none") => (
-      <li key={book.id}>
-        <div className="book">
-          <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-            <div className="book-shelf-changer">
-                <select value={book.shelf} onChange={(event) => changeShelf(book, event.target.value)}>
-                  <option value="none" disabled >Move to...</option>
-                  <option value="currentlyReading">Currently Reading</option>
-                  <option value="wantToRead">Want to Read</option>
-                  <option value="read">Read</option>
-                  <option value="none">None</option>
-                </select>
-              </div>
-            </div>
-            <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.author}</div>
-            </div>
-      </li>
-    )
+
 
     render() {
       const {books, changeShelf} = this.props
@@ -53,35 +35,11 @@ class ListBooks extends Component {
           <div className="list-books-content">
             <div>
 
-              <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
-                  <ol className="books-grid">
-                    {currentlyReading.map((book) => this.createBook(book, changeShelf))
-                  }
-                    </ol>
-                  </div>
-                </div>
+              <Shelf books={currentlyReading} changeShelf={changeShelf} shelf="Currently Reading" />
 
-              <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {wantToRead.map((book) => this.createBook(book, changeShelf))
-                    }
-                  </ol>
-                  </div>
-              </div>
+              <Shelf books={wantToRead} changeShelf={changeShelf} shelf="Currently Reading" />
 
-              <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {read.map((book) => this.createBook(book, changeShelf))
-                    }
-                  </ol>
-                  </div>
-              </div>
+              <Shelf books={read} changeShelf={changeShelf} shelf="Currently Reading" />
 
               </div>
             </div>
@@ -96,12 +54,4 @@ class ListBooks extends Component {
                   }
 
 
-// ListContacts.propTypes = {
-//   contacts: PropTypes.array.isRequired,
-//   onDeleteContact: PropTypes.func.isRequired
-// }
-
-
-
-
-export default ListBooks  //so that we can import it in contacts.js
+export default ListBooks

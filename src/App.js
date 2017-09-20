@@ -29,9 +29,8 @@ changeShelf = (book, shelf) => {
   }))
 
   BooksAPI.update(book, shelf)
-
-
 }
+
 
   render() {
 
@@ -44,7 +43,7 @@ changeShelf = (book, shelf) => {
         )}/>
 
         <Route path="/search" render={() => (
-          <AddBook changeShelf={this.changeShelf} />
+          <AddBook changeShelf={this.changeShelf} books={this.state.books}/>
         )}/>
 
       </div>
